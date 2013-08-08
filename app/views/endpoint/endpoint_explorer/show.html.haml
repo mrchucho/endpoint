@@ -1,0 +1,39 @@
+%h2 Endpoints
+
+%table.table.monospace
+
+  - @explorer.endpoints.each do |endpoint|
+
+
+    %thead
+      %tr.section
+        %td{colspan: 4}
+          .formats
+            formats:
+            = endpoint.formats.join(', ')
+
+          %h3= endpoint.name.titlecase
+          %div.description
+            :markdown
+              #{endpoint.description}
+    %thead
+      %tr
+        %th method
+        %th path
+        %th args
+        %th examples
+    %tbody
+      - endpoint.paths.each do |path|
+        %tr
+          %td= path[:method]
+          %td= path[:path]
+          %td
+            - Array(path[:args]).each do |arg|
+              .arg
+                = arg[:name]
+                - if arg[:required]
+                  (required)
+          %td
+            - Array(path[:examples]).each do |example|
+              .example
+                = link_to example[:body], example[:url]
