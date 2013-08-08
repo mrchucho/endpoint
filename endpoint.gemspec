@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
     'lib/endpoint/endpoint.rb',
     'lib/endpoint/endpoint_explorer.rb',
     'lib/endpoint/engine.rb',
+    'lib/extensions/gherkin/formatter/explorer_formatter.rb',
   ]
   s.test_files  = [
     'spec/config/application.rb',
@@ -25,4 +26,5 @@ Gem::Specification.new do |s|
     'spec/spec_helper.rb',
   ]
   s.add_dependency('rails', ['>= 3.2.0'])
+  s.add_dependency('gherkin', ['~> 2.12.0'])
 end

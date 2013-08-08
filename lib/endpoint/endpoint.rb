@@ -1,4 +1,5 @@
 require 'gherkin/parser/parser'
+require 'extensions/gherkin/formatter/explorer_formatter'
 
 module Endpoint
   class Endpoint
@@ -74,7 +75,7 @@ module Endpoint
       parser = Gherkin::Parser::Parser.new(formatter)
 
       source = "features/endpoints/#{controller}.feature"
-      path = File.expand_path(File.dirname(__FILE__) + '/../../' + source)
+      path = File.expand_path(Rails.root + source)
       parser.parse(IO.read(path), path, 0)
       formatter.done
       description = formatter.description
