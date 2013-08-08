@@ -4,7 +4,7 @@ module Endpoint
   class Endpoint
 
     EXCLUDE_ACTIONS = %w(new edit)
-    EXCLUDE_PATHS_REGEX = /contract\-set/
+    EXCLUDE_PATHS_REGEX = /excluded\-path/ # for example
 
       def initialize(controller)
         @controller = controller
