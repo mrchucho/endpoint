@@ -1,3 +1,5 @@
+require 'gherkin/parser/parser'
+
 module Endpoint
   class Endpoint
 

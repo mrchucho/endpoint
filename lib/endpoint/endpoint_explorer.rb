@@ -1,5 +1,3 @@
-require 'gherkin/parser/parser'
-
 module Endpoint
   class EndpointExplorer
     EXCLUDE_CONTROLLERS_REGEX = /^devise|^explorer|^application|^static\_pages/i

@@ -1,6 +1,8 @@
-describe EndpointExplorer do
+require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-  subject { EndpointExplorer.new }
+describe Endpoint::EndpointExplorer do
+
+  subject { Endpoint::EndpointExplorer.new }
 
   describe '#endpoints' do
 
