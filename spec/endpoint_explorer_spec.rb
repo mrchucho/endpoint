@@ -1,6 +1,24 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
+class MockController < ActionController::Base
+  include Endpoint::ApiExpression
+  respond_to :json, :html
+  describe :show, output: :resource, example: ->{{}}
+  def show
+    head(200)
+  end
+end
+
 describe Endpoint::EndpointExplorer do
+
+  before do
+    Rails.application.routes.draw do
+      get 'test/:id', to: 'mock#show'
+    end
+  end
+  after do
+    Rails.application.reload_routes!
+  end
 
   subject { Endpoint::EndpointExplorer.new }
 
