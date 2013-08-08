@@ -1,9 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-class MockController < ActionController::Base
+class MocksController < ActionController::Base
   include Endpoint::ApiExpression
   respond_to :json, :html
-  describe :show, output: :resource, example: ->{{}}
+  describe :show, output: :resource, example: ->{{id: 1234}}
   def show
     head(200)
   end
@@ -13,7 +13,7 @@ describe Endpoint::EndpointExplorer do
 
   before do
     Rails.application.routes.draw do
-      get 'test/:id', to: 'mock#show'
+      resources :mocks
     end
   end
   after do
@@ -40,38 +40,28 @@ describe Endpoint::EndpointExplorer do
       expect(path[:path]).to match(/\w+\/:id\(\.:format\)/)
     end
 
-#    context 'given a facility with id 210000001' do
-#
-#      # TODO: Should this use a mock controller/model perhaps instead of tying
-#      # to a specific controller/model?
-#      let(:facility) { FactoryGirl.build(:facility, id: 210000001) }
-#
-#      before do
-#        Facility.stub(:first).and_return(facility)
-#      end
-#
-#      it 'returns paths with an example' do
-#        endpoint = subject.endpoints.detect{|e|e.name == 'facilities'}
-#        path = endpoint.paths.detect { |p| p[:path] =~ /\/:id/ }
-#        expect(path[:examples][0][:url]).to eq('/facilities/210000001')
-#      end
-#
-#    end
+    context 'given a "resource" with id 1234' do
 
-#    context 'given bad data' do
-#
-#      # TODO: Should this use a mock controller/model perhaps instead of tying
-#      # to a specific controller/model?
-#      before do
-#        FacilitiesController.stub(:examples_for).and_return(-> { {id: nil} })
-#      end
-#
-#      it 'returns paths without error' do
-#        endpoint = subject.endpoints.detect{|e|e.name == 'facilities'}
-#        expect { endpoint.paths }.to_not raise_error
-#      end
-#
-#    end
+      it 'returns paths with an example' do
+        endpoint = subject.endpoints.detect{|e|e.name == 'mocks'}
+        path = endpoint.paths.detect { |p| p[:path] =~ /\/:id/ }
+        expect(path[:examples][0][:url]).to eq('/mocks/1234')
+      end
+
+    end
+
+    context 'given bad data' do
+
+      before do
+        MocksController.stub(:examples_for).and_return(-> { {id: nil} })
+      end
+
+      it 'returns paths without error' do
+        endpoint = subject.endpoints.detect{|e|e.name == 'mocks'}
+        expect { endpoint.paths }.to_not raise_error
+      end
+
+    end
 
   end
 
