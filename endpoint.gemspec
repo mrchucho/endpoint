@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
     'lib/endpoint.rb',
     'lib/endpoint/endpoint.rb',
     'lib/endpoint/endpoint_explorer.rb',
+    'lib/endpoint/api_expression.rb',
     'spec/endpoint_explorer_spec.rb',
   ]
   s.add_dependency('rails')
