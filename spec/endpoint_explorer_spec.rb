@@ -33,9 +33,9 @@ describe Endpoint::EndpointExplorer do
     end
 
     it 'returns endpoint paths with information about path method and params' do
-      endpoints = subject.endpoints
+      paths = subject.paths
       # Find the first path for a single resource with id
-      path = endpoints.map(&:paths).flatten.detect { |p| p[:path] =~ /\/:id/ }
+      path = paths.detect { |p| p[:path] =~ /\/:id/ }
       expect(path[:method]).to eq('GET')
       expect(path[:path]).to match(/\w+\/:id\(\.:format\)/)
     end

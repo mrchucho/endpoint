@@ -11,6 +11,14 @@ module Endpoint
       end
     end
 
+    def paths
+      endpoints.map(&:paths).flatten
+    end
+
+    def examples
+      paths.map { |p| p[:examples] }.flatten
+    end
+
     protected
 
     def filtered_controllers
