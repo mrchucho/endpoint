@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'endpoint'
-  s.version     = '0.0.0'
+  s.version     = '1.0.0'
   s.summary     = 'API Endpoint Explorer'
   s.description = 'API Endpoint Explorer. Extracted from Platform.'
   s.authors     = ['Ralph Churchill']
