@@ -36,4 +36,4 @@
           %td
             - Array(path[:examples]).each do |example|
               .example
-                = link_to example[:body], example[:url]
+                = link_to URI.unescape(example[:body]), example[:url]
