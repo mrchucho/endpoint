@@ -7,6 +7,15 @@ class MocksController < ActionController::Base
   def show
     head(200)
   end
+
+  describe :index, output: :resource,
+    example: {
+      description: 'This is a description',
+      parameters: ->{{sort: 'asc'}}
+    }
+  def index
+    head(200)
+  end
 end
 
 describe Endpoint::EndpointExplorer do
@@ -46,6 +55,17 @@ describe Endpoint::EndpointExplorer do
         endpoint = subject.endpoints.detect{|e|e.name == 'mocks'}
         path = endpoint.paths.detect { |p| p[:path] =~ /\/:id/ }
         expect(path[:examples][0][:url]).to eq('/mocks/1234')
+      end
+
+    end
+
+    context 'given paths with descriptions' do
+
+      it 'returns paths with an example url and description' do
+        endpoint = subject.endpoints.detect{|e|e.name == 'mocks'}
+        path = endpoint.paths.detect { |p| p[:path] !=~ /\/:id/ }
+        expect(path[:examples][0][:url]).to eq('/mocks?sort=asc')
+        expect(path[:examples][0][:description]).to eq('This is a description')
       end
 
     end
