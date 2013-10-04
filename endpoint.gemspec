@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'endpoint'
-  s.version     = '1.0.0'
+  s.version     = '2.0.0'
   s.summary     = 'API Endpoint Explorer'
   s.description = 'API Endpoint Explorer. Extracted from Platform.'
   s.authors     = ['Ralph Churchill']
@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
     'Gemfile',
     'README.md',
     'VERSION',
+    'app/assets/stylesheets/endpoint/style.css.scss',
     'app/controllers/endpoint/endpoint_explorer_controller.rb',
     'app/views/endpoint/endpoint_explorer/show.html.haml',
     'lib/endpoint.rb',
@@ -27,4 +28,5 @@ Gem::Specification.new do |s|
   ]
   s.add_dependency('rails', ['>= 3.2.0'])
   s.add_dependency('gherkin', ['~> 2.12.0'])
+  s.add_dependency('sass-rails', ['~> 4.0.0'])
 end
