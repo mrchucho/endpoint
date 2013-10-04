@@ -115,12 +115,18 @@ module Endpoint
     def examples_for_action_verb(action, verb)
       examples = controller_class.examples_for(action)
       Array(examples).map do |ex|
-        {body: '', url: ''}.tap do |link|
+        {body: '', url: '', description: ''}.tap do |link|
           if ex.respond_to?(:call)
             params = (ex.call rescue nil)
           else
-            params = ex
+            if ex[:parameters].respond_to?(:call)
+              params = (ex[:parameters].call rescue nil)
+            else
+              params = ex[:parameters]
+            end
+            link[:description] = ex[:description]
           end
+
           if params
             begin
               if %w(PUT PATCH).include?(verb)
