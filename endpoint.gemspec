@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
     'app/views/endpoint/endpoint_explorer/show.html.haml',
     'lib/endpoint.rb',
     'lib/endpoint/api_expression.rb',
+    'lib/endpoint/cache.rake',
     'lib/endpoint/endpoint.rb',
     'lib/endpoint/endpoint_explorer.rb',
     'lib/endpoint/engine.rb',
