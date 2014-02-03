@@ -1,57 +1,58 @@
-%h2
-  %strong Endpoints
-- @explorer.endpoints.each do |endpoint|
+- cache 'endpoint-explorer', skip_digest: true do
+  %h2
+    %strong Endpoints
+  - @explorer.endpoints.each do |endpoint|
 
-  %table.table
-    %thead
-      %tr.well.well-lg
-        %td{colspan: 3}
-          %h3
-            %strong= endpoint.name.titlecase
-          %div.description.pull-left
-            :markdown
-              #{endpoint.description}
-          .formats.pull-right
-            formats:
-            = endpoint.formats.join(', ')
+    %table.table
+      %thead
+        %tr.well.well-lg
+          %td{colspan: 3}
+            %h3
+              %strong= endpoint.name.titlecase
+            %div.description.pull-left
+              :markdown
+                #{endpoint.description}
+            .formats.pull-right
+              formats:
+              = endpoint.formats.join(', ')
 
-    %thead
-      %tr
-        %th.method method
-        %th.path path
-    %tbody
-      - endpoint.paths.each do |path|
-        %tr.endpoint
-          %td.monospace= path[:method]
-          %td
-            %div
-              .monospace= path[:path]
-              - if Array(path[:args]).present?
-                %div.panel.panel-default.args
-                  %div.panel-heading
-                    Args
-                  %table.table.table-striped.table-bordered
-                    %thead
-                      %tr
-                        %th.arg-name name
-                        %th.arg-description description
-                    %tbody
-                      - Array(path[:args]).each do |arg|
-                        %tr.arg
-                          %td.arg-name.monospace
-                            = arg[:name]
-                            - if arg[:required]
-                              (required)
-                          %td.arg-description
-                            :markdown
-                              #{arg[:description]}
-              - if Array(path[:examples]).present?
-                %div.panel.panel-default.examples
-                  %div.panel-heading
-                    Examples
-                  %div.panel-body
-                    - Array(path[:examples]).each do |example|
-                      .example
-                        :markdown
-                          #{example[:description]}
-                        .monospace= link_to URI.unescape(example[:body]), example[:url]
+      %thead
+        %tr
+          %th.method method
+          %th.path path
+      %tbody
+        - endpoint.paths.each do |path|
+          %tr.endpoint
+            %td.monospace= path[:method]
+            %td
+              %div
+                .monospace= path[:path]
+                - if Array(path[:args]).present?
+                  %div.panel.panel-default.args
+                    %div.panel-heading
+                      Args
+                    %table.table.table-striped.table-bordered
+                      %thead
+                        %tr
+                          %th.arg-name name
+                          %th.arg-description description
+                      %tbody
+                        - Array(path[:args]).each do |arg|
+                          %tr.arg
+                            %td.arg-name.monospace
+                              = arg[:name]
+                              - if arg[:required]
+                                (required)
+                            %td.arg-description
+                              :markdown
+                                #{arg[:description]}
+                - if Array(path[:examples]).present?
+                  %div.panel.panel-default.examples
+                    %div.panel-heading
+                      Examples
+                    %div.panel-body
+                      - Array(path[:examples]).each do |example|
+                        .example
+                          :markdown
+                            #{example[:description]}
+                          .monospace= link_to URI.unescape(example[:body]), example[:url]
