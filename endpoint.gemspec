@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
     'spec/endpoint_explorer_spec.rb',
     'spec/spec_helper.rb',
   ]
-  s.add_dependency('rails', ['>= 3.2.0'])
+  s.add_dependency('rails', ['>= 4.2.0'])
   s.add_dependency('gherkin', ['~> 2.12.0'])
-  s.add_dependency('sass-rails', ['~> 4.0.0'])
+  s.add_dependency('sass-rails', ['~> 5.0.0'])
 end
